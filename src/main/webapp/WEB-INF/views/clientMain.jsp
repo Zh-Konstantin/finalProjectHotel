@@ -182,7 +182,7 @@
                             <div class="button-wrapper">
                                 <p style="color: red;">${errorString}</p>
                                 <p style="color: green;">${invoiceConfirmation}</p>
-                                <button type="submit" class="button">Отправить заявку на бронирование</button>
+                                <button type="submit" class="button">Забронировать номер</button>
                             </div>
                         </div>
                     </form>
@@ -190,7 +190,7 @@
 
                     <form id="formToManager" action="#" class="form-client">
                         <div class="block__slot">
-                            <p class="title">Оставить заявку менеджеру:</p>
+                            <p class="title">Вы можете заполнить и оставить заявку менеджеру:</p>
 
                             <div class="time-slot-row">
                                 <p class="time-desc">Сколько дней планируете отдыхать?</p>
@@ -202,7 +202,7 @@
                             </div>
 
                             <div class="time-slot-row">
-                                <p class="time-desc">Количество человек</p>
+                                <p class="time-desc">Количество гостей</p>
                                 <div class="time-slots">
                                     <div class="time-slot">
                                         <input class="time-slot-box" min="1" type="number" name="peoples" id="peoples" value="peoples">
