@@ -12,6 +12,7 @@ public class Order implements Entity {
     private int peoplesCount;
     private double totalSum;
     private OrderStatus status = OrderStatus.NEW;
+    private RoomClass roomClass;
 
     public int getId() {
         return id;
@@ -69,10 +70,18 @@ public class Order implements Entity {
         this.peoplesCount = peoplesCount;
     }
 
+    public RoomClass getRoomClass() {
+        return roomClass;
+    }
+
+    public void setRoomClass(RoomClass roomClass) {
+        this.roomClass = roomClass;
+    }
+
     public Order() {
     }
 
-    public Order(int id, int room, int user, int daysNumber, int peoplesCount, double totalSum, OrderStatus status) {
+    public Order(int id, int room, int user, int daysNumber, int peoplesCount, double totalSum, OrderStatus status, RoomClass roomClass) {
         this.id = id;
         this.roomId = room;
         this.userId = user;
@@ -80,6 +89,14 @@ public class Order implements Entity {
         this.peoplesCount = peoplesCount;
         this.totalSum = totalSum;
         this.status = status;
+        this.roomClass = roomClass;
+    }
+
+    public Order(int userId, int daysNumber, int peoplesCount, RoomClass roomClass) {
+        this.userId = userId;
+        this.daysNumber = daysNumber;
+        this.peoplesCount = peoplesCount;
+        this.roomClass = roomClass;
     }
 
     public String getStatusRus() {
@@ -95,5 +112,9 @@ public class Order implements Entity {
 
     public boolean inConfirmation(){
         return status == OrderStatus.IN_CONFIRM;
+    }
+
+    public boolean isNew(){
+        return status == OrderStatus.NEW;
     }
 }

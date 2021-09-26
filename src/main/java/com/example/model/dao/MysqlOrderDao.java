@@ -34,12 +34,13 @@ public class MysqlOrderDao implements OrderDao {
     public boolean create(Order entity) throws UnsuccessfulRequestException {
         int changes;
         try(PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO orders (user_id, days_number, peoples_count) " +
-                        "values (?,?,?);")){
+                "INSERT INTO orders (user_id, days_number, peoples_count, room_class) " +
+                        "values (?,?,?,?);")){
 
             statement.setInt(1, entity.getUserId());
             statement.setInt(2, entity.getDaysNumber());
             statement.setInt(3, entity.getPeoplesCount());
+            statement.setString(4, entity.getRoomClass().getName());
             changes = statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.debug(e.getMessage());
@@ -68,13 +69,30 @@ public class MysqlOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getNewOrder() throws UnsuccessfulRequestException {
+    public List<Order> getNewOrders() throws UnsuccessfulRequestException {
         List<Order> orders;
         ResultSet resultSet = null;
         try(PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM orders " +
                         "WHERE status = ?;")){
             statement.setString(1, "new");
+            resultSet = statement.executeQuery();
+            orders = parseToEntityList(resultSet);
+        } catch (SQLException e){
+            LOGGER.debug(e.getMessage());
+            throw new UnsuccessfulRequestException(e.getMessage(), e.getCause());
+        } finally {
+            closeResultSet(resultSet);
+        }
+        return orders;
+    }
+
+    @Override
+    public List<Order> getOrders() throws UnsuccessfulRequestException {
+        List<Order> orders;
+        ResultSet resultSet = null;
+        try(PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM orders;")){
             resultSet = statement.executeQuery();
             orders = parseToEntityList(resultSet);
         } catch (SQLException e){
@@ -104,15 +122,51 @@ public class MysqlOrderDao implements OrderDao {
     }
 
     @Override
-    public boolean addRoomInfo(int orderId, int roomNumber, double totalSum) throws UnsuccessfulRequestException {
+    public Order getOrder(int orderId) throws UnsuccessfulRequestException {
+        Order order;
+        ResultSet resultSet = null;
+        try(PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM orders " +
+                        "WHERE order_id = ?;")){
+            statement.setInt(1, orderId);
+            resultSet = statement.executeQuery();
+            order = parseSingleEntity(resultSet);
+        } catch (SQLException e){
+            LOGGER.debug(e.getMessage());
+            throw new UnsuccessfulRequestException(e.getMessage(), e.getCause());
+        } finally {
+            closeResultSet(resultSet);
+        }
+        return order;
+    }
+
+    /**
+     * Helper-method which encapsulates getting a single entity
+     * from the ResultSet object
+     * @param rs ResultSet object, which represents the result of an SQL-query
+     * @return model entity
+     * @throws SQLException in case when there is an SQL-related error
+     */
+    private Order parseSingleEntity(ResultSet rs) throws SQLException {
+        List<Order> orders = parseToEntityList(rs);
+
+        if (orders.size() == 0)
+            return null;
+
+        return orders.get(0);
+    }
+
+    @Override
+    public boolean addRoomInfo(int orderId, int roomNumber, double totalSum, RoomClass roomClass) throws UnsuccessfulRequestException {
         int changes;
         try(PreparedStatement statement = connection.prepareStatement(
                 "UPDATE orders " +
-                        "SET apartment_number = ?, total_sum = ? " +
+                        "SET apartment_number = ?, total_sum = ?, room_class = ? " +
                         "WHERE order_id = ?;")){
             statement.setInt(1, roomNumber);
             statement.setDouble(2, totalSum);
-            statement.setInt(2, orderId);
+            statement.setString(3, roomClass.getName());
+            statement.setInt(4, orderId);
             changes = statement.executeUpdate();
         } catch (SQLException e){
             LOGGER.debug(e.getMessage());
@@ -148,6 +202,14 @@ public class MysqlOrderDao implements OrderDao {
             order.setDaysNumber(resultSet.getInt("days_number"));
             order.setPeoplesCount(resultSet.getInt("peoples_count"));
             order.setTotalSum(resultSet.getInt("total_sum"));
+
+            String roomClass = resultSet.getString("room_class");
+            if (roomClass.equalsIgnoreCase(RoomClass.LUX.getName()))
+                order.setRoomClass(RoomClass.LUX);
+            else if (roomClass.equalsIgnoreCase(RoomClass.STANDARD.getName()))
+                order.setRoomClass(RoomClass.STANDARD);
+            else if (roomClass.equalsIgnoreCase(RoomClass.ECONOMY.getName()))
+                order.setRoomClass(RoomClass.ECONOMY);
 
             String status = resultSet.getString("status");
             if (status.equalsIgnoreCase(OrderStatus.NEW.getName()))

@@ -6,6 +6,7 @@ import com.example.model.dao.OrderDao;
 import com.example.model.dao.factory.DAOFactory;
 import com.example.model.dao.factory.MySqlDAOFactory;
 import com.example.model.entity.Order;
+import com.example.model.entity.RoomClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,9 +40,14 @@ public class OrderService {
         return orderDao.getOrdersForUser(userId);
     }
 
-    public List<Order> getNewOrder() throws UnsuccessfulRequestException {
+    public List<Order> getNewOrders() throws UnsuccessfulRequestException {
         OrderDao orderDao = factory.createOrderDao(manager.getConnection());
-        return orderDao.getNewOrder();
+        return orderDao.getNewOrders();
+    }
+
+    public List<Order> getOrders() throws UnsuccessfulRequestException {
+        OrderDao orderDao = factory.createOrderDao(manager.getConnection());
+        return orderDao.getOrders();
     }
 
     public boolean refreshStatus(int orderId, String orderStatus) throws UnsuccessfulRequestException {
@@ -49,8 +55,13 @@ public class OrderService {
         return orderDao.refreshStatus(orderId, orderStatus);
     }
 
-    public boolean addRoomInfo(int orderId, int roomNumber, double totalSum) throws UnsuccessfulRequestException {
+    public boolean addRoomInfo(int orderId, int roomNumber, double totalSum,  RoomClass roomClass) throws UnsuccessfulRequestException {
         OrderDao orderDao = factory.createOrderDao(manager.getConnection());
-        return orderDao.addRoomInfo(orderId, roomNumber, totalSum);
+        return orderDao.addRoomInfo(orderId, roomNumber, totalSum, roomClass);
+    }
+
+    public Order getOrder(int orderId) throws UnsuccessfulRequestException {
+        OrderDao orderDao = factory.createOrderDao(manager.getConnection());
+        return orderDao.getOrder(orderId);
     }
 }

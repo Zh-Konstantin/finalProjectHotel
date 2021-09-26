@@ -182,15 +182,18 @@
                     </form>
 
 
-                    <form id="formToManager" action="#" class="form-client">
+                    <form id="formToManager" action="${pageContext.request.contextPath}/client-order-create" class="form-client">
                         <div class="block__slot">
                             <p class="title">Вы можете заполнить и оставить заявку менеджеру:</p>
+
+                            <p style="color: red;">${errorString2}</p>
+                            <p style="color: green;">${orderConfirmation}</p>
 
                             <div class="time-slot-row">
                                 <p class="time-desc">Сколько дней планируете отдыхать?</p>
                                 <div class="time-slots">
                                     <div class="time-slot">
-                                        <input class="time-slot-box" min="1" type="number" name="days" id="days" value="days">
+                                        <input class="time-slot-box" min="1" type="number" name="days" id="days">
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +202,7 @@
                                 <p class="time-desc">Количество гостей</p>
                                 <div class="time-slots">
                                     <div class="time-slot">
-                                        <input class="time-slot-box" min="1" type="number" name="peoples" id="peoples" value="peoples">
+                                        <input class="time-slot-box" min="1" type="number" name="peoples" id="peoples">
                                     </div>
                                 </div>
                             </div>

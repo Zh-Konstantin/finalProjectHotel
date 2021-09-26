@@ -1,19 +1,37 @@
 package com.example;
 
 import com.example.model.entity.Room;
+import com.example.model.entity.User;
+import com.example.model.entity.UserRole;
 import com.example.service.RoomService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * The servlet responsible for receiving the list of fee room,
+ * as well as pagination on this list
+ */
 public class RoomPaginationServlet extends HttpServlet {
 
     private static final int RECORDS_PER_PAGE = 4;
+    private static final String USER_PARAM = "user";
+    private Logger logger;
+
+    @Override
+    public void init() throws ServletException {
+        logger = LogManager.getLogger(this.getClass().getSimpleName());
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +54,7 @@ public class RoomPaginationServlet extends HttpServlet {
      */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
 
         String page = request.getParameter("currentPage");
         int currentPage;
@@ -59,7 +78,13 @@ public class RoomPaginationServlet extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", RECORDS_PER_PAGE);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main/client");
+        User user = (User) session.getAttribute(USER_PARAM);
+        RequestDispatcher dispatcher;
+        if (user.getRole() == UserRole.MANAGER)
+            dispatcher = request.getRequestDispatcher("/main/manager/rooms");
+        else
+            dispatcher = request.getRequestDispatcher("/main/client");
+
         dispatcher.forward(request, response);
     }
 

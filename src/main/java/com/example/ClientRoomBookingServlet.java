@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * The servlet responsible for booking a room by the client.
  */
-public class RoomBookingServlet extends HttpServlet {
+public class ClientRoomBookingServlet extends HttpServlet {
 
     private Logger logger;
     private static final String ROOM_NUMBER = "room";

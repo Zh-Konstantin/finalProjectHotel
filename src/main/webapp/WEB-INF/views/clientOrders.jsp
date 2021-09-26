@@ -127,6 +127,7 @@
                                         <th class="about__table-td">Гостиничный номер</th>
                                         <th class="about__table-td">Количество дней</th>
                                         <th class="about__table-td">Количество гостей</th>
+                                        <th class="about__table-td">Класс номера</th>
                                         <th class="about__table-td">Сумма к оплате</th>
                                         <th class="about__table-td">Статус</th>
                                         <th class="about__table-td">Подтвердить / Отменить</th>
@@ -134,24 +135,25 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${orders}" var="order">
-                                    <tr class="about__table-tr">
-                                        <th class="about__table-td">${order.getId()}</th>
-                                        <th class="about__table-td">${order.getRoomId}</th>
-                                        <th class="about__table-td">${order.getDaysNumber()}</th>
-                                        <th class="about__table-td">${order.getPeoplesCount()}</th>
-                                        <th class="about__table-td">${order.getSum()}</th>
-                                        <th class="about__table-td">${order.getStatusRus()}</th>
-                                        <th class="about__table-td">
-                                            <c:if test="${order.inConfirmation()}">
-                                                <p>
-                                                    <a href="${pageContext.request.contextPath}/client-invoice-payment?order=${order.getId()}&room=${order.getRoomId()}&sum=${order.getSum()}">подтвердить</a> /
-                                                    <a href="${pageContext.request.contextPath}/client-invoice-refusal?order=${order.getId()}&room=${order.getRoomId()}">отменить</a>
-                                                </p>
-                                            </c:if>
-                                        </th>
-                                    </tr>
-                                    </tbody>
+                                        <tr class="about__table-tr">
+                                            <th class="about__table-td">${order.getId()}</th>
+                                            <th class="about__table-td">${order.getRoomId()}</th>
+                                            <th class="about__table-td">${order.getDaysNumber()}</th>
+                                            <th class="about__table-td">${order.getPeoplesCount()}</th>
+                                            <th class="about__table-td">${order.getRoomClass().getName()}</th>
+                                            <th class="about__table-td">${order.getTotalSum()}</th>
+                                            <th class="about__table-td">${order.getStatusRus()}</th>
+                                            <th class="about__table-td">
+                                                <c:if test="${order.inConfirmation()}">
+                                                    <p>
+                                                        <a href="${pageContext.request.contextPath}/client-invoice-payment?order=${order.getId()}&room=${order.getRoomId()}&sum=${order.getSum()}">подтвердить</a> /
+                                                        <a href="${pageContext.request.contextPath}/client-invoice-refusal?order=${order.getId()}&room=${order.getRoomId()}">отменить</a>
+                                                    </p>
+                                                </c:if>
+                                            </th>
+                                        </tr>
                                     </c:forEach>
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="button-wrapper">

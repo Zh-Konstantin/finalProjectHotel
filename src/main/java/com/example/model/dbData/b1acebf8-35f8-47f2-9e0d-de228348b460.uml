@@ -3,23 +3,23 @@
   <ID>DATABASE</ID>
   <OriginalElement>b1acebf8-35f8-47f2-9e0d-de228348b460</OriginalElement>
   <nodes>
-    <node x="303.25" y="192.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.rooms</node>
-    <node x="80.75" y="460.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.invoice</node>
-    <node x="80.75" y="219.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.orders</node>
-    <node x="-119.25" y="192.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.users</node>
+    <node x="549.25" y="219.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.rooms</node>
+    <node x="313.75" y="514.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.invoice</node>
+    <node x="89.25" y="241.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.users</node>
+    <node x="313.75" y="175.0">b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.orders</node>
   </nodes>
   <notes />
   <edges>
     <edge source="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.invoice" target="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.rooms" relationship="REFERENCES">
       <point x="52.66666666666666" y="-94.5" />
-      <point x="212.41666666666666" y="434.0" />
-      <point x="382.25" y="434.0" />
+      <point x="445.41666666666663" y="472.0" />
+      <point x="628.25" y="472.0" />
       <point x="0.0" y="83.5" />
     </edge>
     <edge source="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.invoice" target="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.users" relationship="REFERENCES">
       <point x="-52.66666666666666" y="-94.5" />
-      <point x="107.08333333333334" y="434.0" />
-      <point x="-45.75" y="434.0" />
+      <point x="340.08333333333337" y="472.0" />
+      <point x="162.75" y="472.0" />
       <point x="0.0" y="72.5" />
     </edge>
     <edge source="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.invoice" target="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.orders" relationship="REFERENCES">
@@ -28,18 +28,16 @@
     </edge>
     <edge source="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.orders" target="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.rooms" relationship="REFERENCES">
       <point x="39.5" y="-94.5" />
-      <point x="199.25" y="193.0" />
-      <point x="382.25" y="193.0" />
+      <point x="628.25" y="186.0" />
       <point x="0.0" y="83.5" />
     </edge>
     <edge source="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.orders" target="b1acebf8-35f8-47f2-9e0d-de228348b460.TABLE:hoteldb.users" relationship="REFERENCES">
       <point x="-39.5" y="-94.5" />
-      <point x="120.25" y="193.0" />
-      <point x="-45.75" y="193.0" />
+      <point x="162.75" y="186.0" />
       <point x="0.0" y="72.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="180.0" y="324.5" />
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="507.0" y="448.0" />
   <SelectedNodes />
   <Categories>
     <Category>Columns</Category>

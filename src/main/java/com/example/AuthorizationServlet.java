@@ -84,7 +84,7 @@ public class AuthorizationServlet extends HttpServlet {
             userService.storeLogginedUser(session, user);
 
             if (user.getRole().equals(UserRole.MANAGER)) {
-                response.sendRedirect(request.getContextPath() + "/main/manager");
+                response.sendRedirect(request.getContextPath() + "/manager-order-pagination");
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/client-room-pagination");
                 dispatcher.forward(request, response);

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet responsible for order confirmation
+ * Servlet responsible for order confirmation by client
  */
 public class ClientOrderConfirmServlet extends HttpServlet {
 

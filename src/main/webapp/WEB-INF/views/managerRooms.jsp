@@ -102,53 +102,38 @@
                         <p class="sub-title">Рады видеть вас на работе :)</p>
                         <p class="header-title"><span id="greeting">${user.getLogin()}</span> 👋</p>
                     </div>
-                    <form id="formClient" action="${pageContext.request.contextPath}/main-order-pagination" class="form-client">
+                    <form id="formClient" action="${pageContext.request.contextPath}/manager-order-confirm" class="form-client">
                         <div class="block__type-occupation">
-                            <p class="title">Просмотрите список заявок от клиентов:</p>
+                            <p class="title">Подберите комнату для заказа: <br>
+                                Количество человек - ${order.getPeoplesCount()} <br>
+                                Количество дней - ${order.getDaysNumber()} <br>
+                                Класс номера - ${order.getRoomClass().getName()}</p>
                             <div class="block-types">
 
-                                <table class="about__table">
-                                    <thead>
-                                    <tr class="about__table-tr">
-                                        <th class="about__table-td">ID заказа</th>
-                                        <th class="about__table-td">Гостиничный номер</th>
-                                        <th class="about__table-td">Количество дней</th>
-                                        <th class="about__table-td">Количество гостей</th>
-                                        <th class="about__table-td">Желаемый класс номера</th>
-                                        <th class="about__table-td">Сумма к оплате</th>
-                                        <th class="about__table-td">Статус</th>
-                                        <th class="about__table-td">  </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${orders}" var="order">
-                                        <tr class="about__table-tr">
-                                            <th class="about__table-td">${order.getId()}</th>
-                                            <th class="about__table-td">${order.getRoomId()}</th>
-                                            <th class="about__table-td">${order.getDaysNumber()}</th>
-                                            <th class="about__table-td">${order.getPeoplesCount()}</th>
-                                            <th class="about__table-td">${order.getRoomClass().getName()}</th>
-                                            <th class="about__table-td">${order.getTotalSum()}</th>
-                                            <th class="about__table-td">${order.getStatusRus()}</th>
-                                            <th class="about__table-td">
-                                                <c:if test="${order.isNew()}">
-                                                    <p>
-                                                        <a href="${pageContext.request.contextPath}/manager-order-save?orderId=${order.getId()}">подобрать номер</a>
-                                                    </p>
-                                                </c:if>
-                                            </th>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                <c:forEach items="${rooms}" var="room">
+                                    <div class="type-box">
+                                        <input type="radio" name="room" id="type_${room.getApartmentNumber()}"
+                                               value="${room.getApartmentNumber()}">
+                                        <label for="type_${room.getApartmentNumber()}" class="type-box-wrapper">
+                                            <figure class="image-wrap">
+                                                <img src="${room.getImgPath()}" class="image" alt="">
+                                            </figure>
+                                            <div class="type-content">
+                                                <p class="type-title">Номер ${room.getRoomClass()}</p>
+                                                <p class="type-title">Спальных мест:${room.getSleepingPlaces()}</p>
+                                                <p class="type-title">Цена: ${room.getPrice()}</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </c:forEach>
 
                                 <div>
-                                    <nav aria-label="Navigation for orders">
+                                    <nav aria-label="Navigation for rooms" class="">
                                         <ul class="pagination">
 
                                             <c:if test="${currentPage != 1}">
                                                 <li class="page-item"><a class="page-link"
-                                                                         href="room-pagination?currentPage=${currentPage-1}">Previous</a>
+                                                                         href="client-room-pagination?currentPage=${currentPage-1}">Previous</a>
                                                 </li>
                                             </c:if>
 
@@ -161,7 +146,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <li class="page-item"><a class="page-link"
-                                                                                 href="room-pagination?currentPage=${i}">${i}</a>
+                                                                                 href="client-room-pagination?currentPage=${i}">${i}</a>
                                                         </li>
                                                     </c:otherwise>
                                                 </c:choose>
@@ -169,7 +154,7 @@
 
                                             <c:if test="${currentPage lt noOfPages}">
                                                 <li class="page-item"><a class="page-link"
-                                                                         href="room-pagination?currentPage=${currentPage+1}">Next</a>
+                                                                         href="client-room-pagination?currentPage=${currentPage+1}">Next</a>
                                                 </li>
                                             </c:if>
 
@@ -177,6 +162,11 @@
                                     </nav>
                                 </div>
 
+                            </div>
+                            <div class="button-wrapper">
+                                <p style="color: red;">${errorString}</p>
+                                <p style="color: green;">${invoiceConfirmation}</p>
+                                <button type="submit" class="button">Отправить на подтверждение клиенту</button>
                             </div>
                         </div>
                     </form>
