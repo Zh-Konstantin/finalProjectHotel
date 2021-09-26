@@ -9,8 +9,9 @@ CREATE TABLE rooms (
                        apartment_number INT PRIMARY KEY NOT NULL,
                        sleeping_places INT,
                        room_class VARCHAR(10) NOT NULL,
+                       price DECIMAL(9, 2) NOT NULL,
                        status VARCHAR(16) NOT NULL,
-                       price DECIMAL(9,2) NOT NULL
+                       img_path VARCHAR(30) DEFAULT '/images/default_room.png'
 );
 CREATE TABLE orders (
                         order_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,7 +19,7 @@ CREATE TABLE orders (
                         user_id INT NOT NULL,
                         days_number INT NOT NULL,
                         peoples_count INT NOT NULL,
-                        total_sum DECIMAL(9,2),
+                        total_sum DECIMAL(9, 2),
                         status VARCHAR(10) DEFAULT 'new',
                         FOREIGN KEY (user_id) REFERENCES users (user_id),
                         FOREIGN KEY (apartment_number) REFERENCES rooms (apartment_number)
@@ -28,9 +29,9 @@ CREATE TABLE invoice (
                          apartment_number INT NOT NULL,
                          user_id INT NOT NULL,
                          order_id INT,
-                         sum DECIMAL(9,2),
-                         paid VARCHAR(6) DEFAULT 'false',
                          date BIGINT NOT NULL,
+                         sum DECIMAL(9, 2),
+                         status VARCHAR(16) NOT NULL,
                          FOREIGN KEY (user_id) REFERENCES users (user_id),
                          FOREIGN KEY (apartment_number) REFERENCES rooms (apartment_number),
                          FOREIGN KEY (order_id) REFERENCES orders (order_id)

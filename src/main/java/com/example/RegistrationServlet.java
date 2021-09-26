@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.exceptions.UnsuccessfulRequestException;
 import com.example.model.entity.User;
 import com.example.model.entity.UserRole;
 import com.example.service.UserService;
@@ -12,9 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
 *Servlet responsible for registering a new client

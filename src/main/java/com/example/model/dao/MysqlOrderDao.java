@@ -1,7 +1,6 @@
 package com.example.model.dao;
 
 import com.example.exceptions.UnsuccessfulRequestException;
-import com.example.model.DBManager;
 import com.example.model.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +37,7 @@ public class MysqlOrderDao implements OrderDao {
                 "INSERT INTO orders (user_id, days_number, peoples_count) " +
                         "values (?,?,?);")){
 
-            statement.setInt(1, entity.getUser().getId());
+            statement.setInt(1, entity.getUserId());
             statement.setInt(2, entity.getDaysNumber());
             statement.setInt(3, entity.getPeoplesCount());
             changes = statement.executeUpdate();
@@ -50,7 +49,7 @@ public class MysqlOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getUserOrders(int userId) throws UnsuccessfulRequestException {
+    public List<Order> getOrdersForUser(int userId) throws UnsuccessfulRequestException {
         List<Order> orders;
         ResultSet resultSet = null;
         try(PreparedStatement statement = connection.prepareStatement(
@@ -144,15 +143,8 @@ public class MysqlOrderDao implements OrderDao {
         while(resultSet.next()){
             order = new Order();
             order.setId(resultSet.getInt("order_id"));
-
-            Room room = new Room();
-            room.setApartmentNumber(resultSet.getInt("apartment_number"));
-            order.setRoom(room);
-
-            User user = new User();
-            user.setId(resultSet.getInt("user_id"));
-            order.setUser(user);
-
+            order.setRoomId(resultSet.getInt("apartment_number"));
+            order.setUserId(resultSet.getInt("user_id"));
             order.setDaysNumber(resultSet.getInt("days_number"));
             order.setPeoplesCount(resultSet.getInt("peoples_count"));
             order.setTotalSum(resultSet.getInt("total_sum"));

@@ -6,8 +6,8 @@ package com.example.model.entity;
 public class Order implements Entity {
 
     private int id;
-    private Room room;
-    private User user;
+    private int roomId;
+    private int userId;
     private int daysNumber;
     private int peoplesCount;
     private double totalSum;
@@ -21,20 +21,20 @@ public class Order implements Entity {
         this.id = id;
     }
 
-    public Room getRoom() {
-        return room;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getDaysNumber() {
@@ -72,13 +72,28 @@ public class Order implements Entity {
     public Order() {
     }
 
-    public Order(int id, Room room, User user, int daysNumber, int peoplesCount, double totalSum, OrderStatus status) {
+    public Order(int id, int room, int user, int daysNumber, int peoplesCount, double totalSum, OrderStatus status) {
         this.id = id;
-        this.room = room;
-        this.user = user;
+        this.roomId = room;
+        this.userId = user;
         this.daysNumber = daysNumber;
         this.peoplesCount = peoplesCount;
         this.totalSum = totalSum;
         this.status = status;
+    }
+
+    public String getStatusRus() {
+        switch (status) {
+            case NEW: return "новый";
+            case IN_CONFIRM: return "ожидает подтверждения";
+            case PENDING_PAYMENT: return "ожидает оплаты";
+            case PAID: return "оплачен";
+            case CANCELED: return "отменен";
+        }
+        return "неизвестный";
+    }
+
+    public boolean inConfirmation(){
+        return status == OrderStatus.IN_CONFIRM;
     }
 }

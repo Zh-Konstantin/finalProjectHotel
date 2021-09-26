@@ -21,7 +21,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RoomPagination</servlet-name>
-        <url-pattern>/room-pagination</url-pattern>
+        <url-pattern>/client-room-pagination</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -48,17 +48,64 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RoomBooking</servlet-name>
-        <url-pattern>/room-booking</url-pattern>
+        <url-pattern>/client-room-booking</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>ClientInvoiceList</servlet-name>
-        <servlet-class>com.example.RoomBookingServlet</servlet-class>
+        <servlet-class>com.example.ClientInvoicesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ClientInvoiceList</servlet-name>
         <url-pattern>/client-invoice-list</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientInvoicePayment</servlet-name>
+        <servlet-class>com.example.ClientInvoicePaymentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientInvoicePayment</servlet-name>
+        <url-pattern>/client-invoice-payment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientInvoiceRefusal</servlet-name>
+        <servlet-class>com.example.ClientInvoiceRefusalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientInvoiceRefusal</servlet-name>
+        <url-pattern>/client-invoice-refusal</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientOrderList</servlet-name>
+        <servlet-class>com.example.ClientOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientOrderList</servlet-name>
+        <url-pattern>/client-order-list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientOrderConfirmation</servlet-name>
+        <servlet-class>com.example.ClientOrderConfirmServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientOrderConfirmation</servlet-name>
+        <url-pattern>/client-order-confirm</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClientOrderCancellation</servlet-name>
+        <servlet-class>com.example.ClientOrderCancelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientOrderCancellation</servlet-name>
+        <url-pattern>/client-order-cancel</url-pattern>
+    </servlet-mapping>
+
+                    <!--jsp-->
 
     <servlet>
         <servlet-name>WelcomePage</servlet-name>
@@ -94,6 +141,15 @@
     <servlet-mapping>
         <servlet-name>clientInvoicesPage</servlet-name>
         <url-pattern>/main/client/invoices</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>clientOderPage</servlet-name>
+        <jsp-file>/WEB-INF/views/clientOrders.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>clientOderPage</servlet-name>
+        <url-pattern>/main/client/orders</url-pattern>
     </servlet-mapping>
 
     <servlet>

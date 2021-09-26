@@ -2,6 +2,7 @@ package com.example.model.dao;
 
 import com.example.exceptions.UnsuccessfulRequestException;
 import com.example.model.entity.Invoice;
+import com.example.model.entity.InvoiceStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,15 +35,15 @@ public class MysqlInvoiceDao implements InvoiceDao {
     public boolean create(Invoice entity) throws UnsuccessfulRequestException {
         int changes;
         try(PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO invoice (apartment_number, user_id, order_id, sum, paid, date) " +
+                "INSERT INTO invoice (apartment_number, user_id, order_id, date, sum, status) " +
                         "values (?,?,?,?,?,?);")){
 
             statement.setInt(1, entity.getRoomId());
             statement.setInt(2, entity.getUserId());
             statement.setInt(3, entity.getOrderId());
-            statement.setDouble(4, entity.getSum());
-            statement.setString(5, String.valueOf(entity.isPaid()));
-            statement.setLong(6, entity.getDate());
+            statement.setLong(4, entity.getDate());
+            statement.setDouble(5, entity.getSum());
+            statement.setString(6, entity.getStatus().getName());
             changes = statement.executeUpdate();
         } catch (SQLException e) {
             logger.debug(e.getMessage());
@@ -55,14 +56,14 @@ public class MysqlInvoiceDao implements InvoiceDao {
     public boolean createWithoutOrderId(Invoice entity) throws UnsuccessfulRequestException {
         int changes;
         try(PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO invoice (apartment_number, user_id, sum, paid, date) " +
+                "INSERT INTO invoice (apartment_number, user_id, date, sum, status) " +
                         "values (?,?,?,?,?);")){
 
             statement.setInt(1, entity.getRoomId());
             statement.setInt(2, entity.getUserId());
-            statement.setDouble(3, entity.getSum());
-            statement.setString(4, String.valueOf(entity.isPaid()));
-            statement.setLong(5, entity.getDate());
+            statement.setLong(3, entity.getDate());
+            statement.setDouble(4, entity.getSum());
+            statement.setString(5, entity.getStatus().getName());
             changes = statement.executeUpdate();
         } catch (SQLException e) {
             logger.debug(e.getMessage());
@@ -76,7 +77,7 @@ public class MysqlInvoiceDao implements InvoiceDao {
         int changes;
         try(PreparedStatement statement = connection.prepareStatement(
                 "UPDATE invoice " +
-                        "SET paid = ? " +
+                        "SET status = ? " +
                         "WHERE invoice_id = ?;")){
             statement.setString(1, status);
             statement.setInt(2, invoiceId);
@@ -93,7 +94,7 @@ public class MysqlInvoiceDao implements InvoiceDao {
         List<Invoice> invoices;
         ResultSet resultSet = null;
         try(PreparedStatement statement = connection.prepareStatement(
-                "SELECT invoice_id, apartment_number, user_id, order_id, date, sum, paid " +
+                "SELECT invoice_id, apartment_number, user_id, order_id, date, sum, status " +
                         "FROM invoice " +
                         "WHERE user_id = ?;")){
             statement.setInt(1, userId);
@@ -125,7 +126,15 @@ public class MysqlInvoiceDao implements InvoiceDao {
             invoice.setOrderId(resultSet.getInt("order_id"));
             invoice.setDate(resultSet.getLong("date"));
             invoice.setSum(resultSet.getDouble("sum"));
-            invoice.setPaid(Boolean.parseBoolean(resultSet.getString("paid")));
+
+            String status = resultSet.getString("status");
+            if (status.equalsIgnoreCase(InvoiceStatus.PENDING_PAYMENT.getName()))
+                invoice.setStatus(InvoiceStatus.PENDING_PAYMENT);
+            else if (status.equalsIgnoreCase(InvoiceStatus.PAID.getName()))
+                invoice.setStatus(InvoiceStatus.PAID);
+            else if (status.equalsIgnoreCase(InvoiceStatus.REJECTED.getName()))
+                invoice.setStatus(InvoiceStatus.REJECTED);
+
             invoices.add(invoice);
         }
         return invoices;

@@ -3,6 +3,7 @@ package com.example.model.entity;
 public enum OrderStatus {
     NEW ("new"),
     IN_CONFIRM ("inConfirm"),
+    PENDING_PAYMENT("pending payment"),
     CANCELED ("canceled"),
     PAID ("paid");
 

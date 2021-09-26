@@ -61,6 +61,44 @@ label {
   }
 }
 
+.about__table {
+  margin-bottom: 50px;
+}
+
+.about__table-caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: normal;
+  color: #200e32;
+  margin-top: 20px;
+}
+
+.about__table-tr {
+  text-align: center;
+  border: 2px solid #200e32;
+  border-left: none;
+  border-right: none;
+}
+
+.about__table-tr + .about__table-tr {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.about__table-td {
+  padding: 10px 30px 10px 0;
+}
+
+.about__table-td span {
+  font-size: 14px;
+  line-height: 17px;
+  display: block;
+}
+
 .animate__fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;

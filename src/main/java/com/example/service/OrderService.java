@@ -34,9 +34,9 @@ public class OrderService {
         return orderDao.create(entity);
     }
 
-    public List<Order> getUserOrders(int userId) throws UnsuccessfulRequestException {
+    public List<Order> getOrdersForUser(int userId) throws UnsuccessfulRequestException {
         OrderDao orderDao = factory.createOrderDao(manager.getConnection());
-        return orderDao.getUserOrders(userId);
+        return orderDao.getOrdersForUser(userId);
     }
 
     public List<Order> getNewOrder() throws UnsuccessfulRequestException {

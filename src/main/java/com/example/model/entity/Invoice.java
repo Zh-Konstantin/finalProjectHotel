@@ -1,6 +1,9 @@
 package com.example.model.entity;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A model class for invoice database table
  */
@@ -11,8 +14,8 @@ public class Invoice implements Entity {
     private int userId;
     private int orderId;
     private double sum;
-    private boolean paid = false;
     private long date;
+    private InvoiceStatus status = InvoiceStatus.PENDING_PAYMENT;
 
     public int getId() {
         return id;
@@ -46,12 +49,11 @@ public class Invoice implements Entity {
         this.sum = sum;
     }
 
-    public boolean isPaid() {
-        return paid;
+    public InvoiceStatus getStatus() {
+        return status;
     }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
+    public void setStatus(InvoiceStatus status) {
+        this.status = status;
     }
 
     public int getOrderId() {
@@ -73,22 +75,40 @@ public class Invoice implements Entity {
     public Invoice() {
     }
 
-    public Invoice(int id, int roomId, int userId, int orderId, double sum, boolean paid, long date) {
+    public Invoice(int id, int roomId, int userId, int orderId, double sum, long date, InvoiceStatus status) {
         this.id = id;
         this.roomId = roomId;
         this.userId = userId;
         this.orderId = orderId;
         this.sum = sum;
-        this.paid = paid;
+        this.status = status;
         this.date = date;
     }
 
-    public Invoice(int roomId, int userId, int orderId, double sum, boolean paid, long date) {
+    public Invoice(int roomId, int userId, int orderId, double sum, long date) {
         this.roomId = roomId;
         this.userId = userId;
         this.orderId = orderId;
         this.sum = sum;
-        this.paid = paid;
         this.date = date;
+    }
+
+    public boolean isPendingPayment(){
+        return status == InvoiceStatus.PENDING_PAYMENT;
+    }
+
+
+    public String getStatusRus(){
+        if (status == InvoiceStatus.PAID)
+            return "оплачен";
+        if (status == InvoiceStatus.REJECTED)
+            return "отменен";
+        return "ожидает оплаты";
+    }
+
+    public String getDateAsStr() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(this.date);
+        return formatter.format(date);
     }
 }

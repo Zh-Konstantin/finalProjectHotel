@@ -57,15 +57,14 @@ public class RoomBookingServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             User user = (User) session.getAttribute("user");
-            //handle error if user == null (or parseException);
+            //handle error if user == null (or parseException);  !!!!!!!!!!!
 
-            //new invoice without order id
+            //new invoice: without order id
             Invoice invoice = new Invoice();
             invoice.setRoomId(room.getApartmentNumber());
             invoice.setUserId(user.getId());
             invoice.setSum(room.getPrice());
-            //new invoice - not paid
-            invoice.setPaid(false);
+            //new invoice: default status - PENDING_PAYMENT
             invoice.setDate(System.currentTimeMillis());
 
             if (invoiceService.createWithoutOrderId(invoice)) {

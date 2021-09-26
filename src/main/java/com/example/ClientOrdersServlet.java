@@ -1,8 +1,8 @@
 package com.example;
 
-import com.example.model.entity.Invoice;
+import com.example.model.entity.Order;
 import com.example.model.entity.User;
-import com.example.service.InvoiceService;
+import com.example.service.OrderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,9 +17,9 @@ import java.util.List;
 
 
 /**
- * Servlet responsible for displaying a list of client's invoices
+ * Servlet responsible for displaying a list of client's orders
  */
-public class ClientInvoicesServlet extends HttpServlet {
+public class ClientOrdersServlet extends HttpServlet {
 
     private Logger logger;
     private static final String USER_PARAM = "user";
@@ -40,7 +40,7 @@ public class ClientInvoicesServlet extends HttpServlet {
     }
 
     /**
-     * Method that implements the search for a list of client's invoices
+     * Method that implements the search for a list of client's orders
      * @param req HttpServletRequest
      * @param resp HttpServletResponse
      * @throws ServletException an exception may occur when redirecting or forwarding a request
@@ -51,12 +51,12 @@ public class ClientInvoicesServlet extends HttpServlet {
         User user = (User) session.getAttribute(USER_PARAM);
 
         if (user != null) {
-            InvoiceService invoiceService = new InvoiceService();
-            List<Invoice> invoices = invoiceService.findInvoicesForUser(user.getId());
+            OrderService orderService = new OrderService();
+            List<Order> orders = orderService.getOrdersForUser(user.getId());
 
-            req.setAttribute("invoices", invoices);
+            req.setAttribute("orders", orders);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/main/client/invoices");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/main/client/orders");
             dispatcher.forward(req, resp);
         } else {
             resp.sendRedirect("/welcome-page");
