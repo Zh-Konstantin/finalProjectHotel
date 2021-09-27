@@ -21,7 +21,7 @@ CREATE TABLE orders (
                         peoples_count INT NOT NULL,
                         room_class VARCHAR(10) NOT NULL,
                         total_sum DECIMAL(9, 2),
-                        status VARCHAR(10) DEFAULT 'new',
+                        status VARCHAR(16) DEFAULT 'new',
                         FOREIGN KEY (user_id) REFERENCES users (user_id),
                         FOREIGN KEY (apartment_number) REFERENCES rooms (apartment_number)
 );

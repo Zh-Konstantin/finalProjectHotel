@@ -121,7 +121,6 @@
                             <div class="block-types">
 
                                 <table class="about__table">
-                                    <thead>
                                     <tr class="about__table-tr">
                                         <th class="about__table-td">ID заказа</th>
                                         <th class="about__table-td">Гостиничный номер</th>
@@ -132,8 +131,6 @@
                                         <th class="about__table-td">Статус</th>
                                         <th class="about__table-td">Подтвердить / Отменить</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
                                     <c:forEach items="${orders}" var="order">
                                         <tr class="about__table-tr">
                                             <th class="about__table-td">${order.getId()}</th>
@@ -146,14 +143,13 @@
                                             <th class="about__table-td">
                                                 <c:if test="${order.inConfirmation()}">
                                                     <p>
-                                                        <a href="${pageContext.request.contextPath}/client-invoice-payment?order=${order.getId()}&room=${order.getRoomId()}&sum=${order.getSum()}">подтвердить</a> /
-                                                        <a href="${pageContext.request.contextPath}/client-invoice-refusal?order=${order.getId()}&room=${order.getRoomId()}">отменить</a>
+                                                        <a href="${pageContext.request.contextPath}/client-order-confirm?order=${order.getId()}&room=${order.getRoomId()}&sum=${order.getTotalSum()}">подтвердить</a> /
+                                                        <a href="${pageContext.request.contextPath}/client-order-cancel?order=${order.getId()}&room=${order.getRoomId()}">отменить</a>
                                                     </p>
                                                 </c:if>
                                             </th>
                                         </tr>
                                     </c:forEach>
-                                    </tbody>
                                 </table>
                             </div>
                             <div class="button-wrapper">

@@ -101,7 +101,7 @@ public class Order implements Entity {
 
     public String getStatusRus() {
         switch (status) {
-            case NEW: return "новый";
+            case NEW: return "ожидает обработки";
             case IN_CONFIRM: return "ожидает подтверждения";
             case PENDING_PAYMENT: return "ожидает оплаты";
             case PAID: return "оплачен";

@@ -62,7 +62,7 @@ public class ClientOrderConfirmServlet extends HttpServlet {
                 orderService.refreshStatus(orderNumber, OrderStatus.PENDING_PAYMENT.getName());
 
                 InvoiceService invoiceService = new InvoiceService();
-                Invoice invoice = new Invoice(roomNumber, user.getId(), orderNumber, System.currentTimeMillis(), Integer.parseInt(sum));
+                Invoice invoice = new Invoice(roomNumber, user.getId(), orderNumber, Double.parseDouble(sum), System.currentTimeMillis());
                 invoiceService.create(invoice);
             }
             resp.sendRedirect("/client-order-list");

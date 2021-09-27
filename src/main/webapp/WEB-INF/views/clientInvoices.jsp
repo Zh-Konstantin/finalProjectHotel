@@ -121,7 +121,6 @@
                             <div class="block-types">
 
                                 <table class="about__table">
-                                    <thead>
                                     <tr class="about__table-tr">
                                         <th class="about__table-td">ID счета</th>
                                         <th class="about__table-td">Дата</th>
@@ -130,23 +129,22 @@
                                         <th class="about__table-td">Статус</th>
                                         <th class="about__table-td">Оплата / Отказ</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
                                     <c:forEach items="${invoices}" var="invoice">
-                                    <tr class="about__table-tr">
-                                        <th class="about__table-td">${invoice.getId()}</th>
-                                        <th class="about__table-td">${invoice.getDateAsStr()}</th>
-                                        <th class="about__table-td">${invoice.getRoomId()}</th>
-                                        <th class="about__table-td">${invoice.getSum()}</th>
-                                        <th class="about__table-td">${invoice.getStatusRus()}</th>
-                                        <th class="about__table-td">
-                                            <c:if test="${invoice.isPendingPayment()}">
-                                                <p><a href="${pageContext.request.contextPath}/client-invoice-payment?invoice=${invoice.getId()}&room=${invoice.getRoomId()}&order=${invoice.getOrderId()}">оплатить</a> /
-                                                    <a href="${pageContext.request.contextPath}/client-invoice-refusal?invoice=${invoice.getId()}&room=${invoice.getRoomId()}&order=${invoice.getOrderId()}">отказаться</a> </p>
-                                            </c:if>
-                                        </th>
-                                    </tr>
-                                    </tbody>
+                                        <tr class="about__table-tr">
+                                            <th class="about__table-td">${invoice.getId()}</th>
+                                            <th class="about__table-td">${invoice.getDateAsStr()}</th>
+                                            <th class="about__table-td">${invoice.getRoomId()}</th>
+                                            <th class="about__table-td">${invoice.getSum()}</th>
+                                            <th class="about__table-td">${invoice.getStatusRus()}</th>
+                                            <th class="about__table-td">
+                                                <c:if test="${invoice.isPendingPayment()}">
+                                                    <p>
+                                                        <a href="${pageContext.request.contextPath}/client-invoice-payment?invoice=${invoice.getId()}&room=${invoice.getRoomId()}&order=${invoice.getOrderId()}">оплатить</a> /
+                                                        <a href="${pageContext.request.contextPath}/client-invoice-refusal?invoice=${invoice.getId()}&room=${invoice.getRoomId()}&order=${invoice.getOrderId()}">отказаться</a>
+                                                    </p>
+                                                </c:if>
+                                            </th>
+                                        </tr>
                                     </c:forEach>
                                 </table>
                             </div>

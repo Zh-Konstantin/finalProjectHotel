@@ -68,7 +68,7 @@ label {
 .about__table-caption {
   caption-side: bottom;
   text-align: left;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 14px;
   font-weight: normal;
   color: #200e32;
@@ -83,7 +83,7 @@ label {
 }
 
 .about__table-tr + .about__table-tr {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 20px;
   font-weight: bold;
   text-align: center;
