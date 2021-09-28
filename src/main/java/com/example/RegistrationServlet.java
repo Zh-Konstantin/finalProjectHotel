@@ -76,10 +76,7 @@ public class RegistrationServlet extends HttpServlet {
             if (userService.create(user)) {
                 request.setAttribute("regConfirmation", REG_CONFIRMATION);
 
-                RequestDispatcher dispatcher
-                        = this.getServletContext().getRequestDispatcher("/reg");
-
-                dispatcher.forward(request, response);
+                response.sendRedirect("/reg");
             }
         }
     }

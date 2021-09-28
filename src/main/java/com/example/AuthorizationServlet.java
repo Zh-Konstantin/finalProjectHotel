@@ -86,8 +86,9 @@ public class AuthorizationServlet extends HttpServlet {
             if (user.getRole().equals(UserRole.MANAGER)) {
                 response.sendRedirect(request.getContextPath() + "/manager-order-pagination");
             } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/client-room-pagination");
-                dispatcher.forward(request, response);
+                /*RequestDispatcher dispatcher = request.getRequestDispatcher("/client-room-pagination");
+                dispatcher.forward(request, response);*/
+                response.sendRedirect(request.getContextPath() + "/client-room-pagination");
             }
         }
     }

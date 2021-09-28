@@ -12,6 +12,8 @@ import java.io.IOException;
  */
 public class AuthorizationFilter implements Filter {
 
+    private static final String USER_PARAM = "user";
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
@@ -34,7 +36,7 @@ public class AuthorizationFilter implements Filter {
 
     private boolean isLoggedIn(HttpSession session) {
         return (session!=null
-                && session.getAttribute("user")!=null);
+                && session.getAttribute(USER_PARAM)!=null);
     }
 }
 

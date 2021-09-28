@@ -1,15 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kostya
-  Date: 9/16/2021
-  Time: 3:10 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<fmt:requestEncoding value="UTF-8" />
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="registration_messages"/>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Registration</title>
     <meta name="description" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
@@ -69,8 +66,8 @@
                 <div class="block__right">
                     <div id="slider" class="block__box">
                         <div class="box-header">
-                            <p class="header-title">Отель</p>
-                            <p class="header-logo">Hotel!</p>
+                            <p class="header-title"><fmt:message key="msg.hotel"/></p>
+                            <p class="header-logo">MyHotel!</p>
                             <figure class="image-wrap">
                                 <img src="${pageContext.request.contextPath}/images/hotel.jpg" alt="" class="image">
                             </figure>
@@ -90,13 +87,12 @@
                                             </svg>
                                         </button>
                                     </form>
-                                    <p class="header-title">Зарегистрируйся сейчас!</p>
-                                    <p class="header-desc">Предоставьте нам информацию ниже <br /> для создания
-                                        аккаунта.</p>
+                                    <p class="header-title"><fmt:message key="msg.reg_now"/></p>
+                                    <p class="header-desc"><fmt:message key="msg.give_info1"/><br /><fmt:message key="msg.give_info2"/></p>
                                 </div>
                                 <form action="${pageContext.request.contextPath}/reg-logic" class="form-login" id="registration" method="post">
                                     <div class="input-wrap">
-                                        <label class="input-label" for="name">Логин</label>
+                                        <label class="input-label" for="name"><fmt:message key="msg.login"/></label>
                                         <p class="input-field">
                                                 <span class="svg-email">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -104,13 +100,13 @@
                                                                 d="M10.8 28C6.5 28 3 24.5 3 20.2v-8.4C3 7.5 6.5 4 10.8 4h11.3c4.3 0 7.8 3.5 7.8 7.8v1.9c0 .5-.4 1-1 .9-.5 0-1-.4-1-.9v-1.9c0-3.2-2.7-5.9-5.9-5.9H10.8c-3.2 0-5.9 2.6-5.9 5.9v8.4c0 3.2 2.7 5.9 5.9 5.9h11.3c3.2 0 5.9-2.6 5.9-5.9.1-.5.5-.9 1.1-.8.4.1.8.4.8.8 0 4.3-3.5 7.8-7.8 7.8H10.8zm3.1-10.7l-5.6-4.4c-.4-.3-.5-.9-.1-1.3.3-.4.9-.5 1.3-.2l5.6 4.4c.7.5 1.7.5 2.4 0l5.5-4.4c.4-.3 1-.3 1.3.1.3.4.3 1-.1 1.3l-5.6 4.4c-1.3 1.2-3.3 1.2-4.7.1z"></path>
                                                     </svg>
                                                 </span>
-                                            <input class="input-box" type="text" placeholder="Логин(максимум 30 символов)" maxlength="30"
+                                            <input class="input-box" type="text" placeholder="<fmt:message key="msg.login_info"/>" maxlength="30"
                                                    name="login" id="name" autocomplete="off">
                                         </p>
                                     </div>
 
                                     <div class="input-wrap">
-                                        <label class="input-label" for="email">Электронная почта</label>
+                                        <label class="input-label" for="email"><fmt:message key="msg.email"/></label>
                                         <p class="input-field">
                                                 <span class="svg-email">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -124,7 +120,7 @@
                                     </div>
 
                                     <div class="input-wrap">
-                                        <label class="input-label" for="password">Пароль</label>
+                                        <label class="input-label" for="password"><fmt:message key="msg.pass"/></label>
                                         <p class="input-field">
                                                 <span class="svg-pass">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -140,7 +136,7 @@
                                     </div>
 
                                     <div class="input-wrap">
-                                        <label class="input-label" for="password_next">Пароль (повторно)</label>
+                                        <label class="input-label" for="password_next"><fmt:message key="msg.pass2"/></label>
                                         <p class="input-field">
                                                 <span class="svg-pass">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -157,13 +153,10 @@
                                     <p style="color: red;">${errorString}</p>
                                     <p style="color: green;">${regConfirmation}</p>
                                 </form>
-                                <div class="pagination-bullets _step2">
-                                    <button id="from2to1" type="button" class="pagination-bullet"></button>
-                                    <button type="button" class="pagination-bullet"></button>
-                                </div>
+
                                 <div class="button-wrapper">
                                     <button id="createAccount" type="submit" class="button" form="registration">
-                                        Создать аккаунт
+                                        <fmt:message key="msg.create_acc"/>
                                         <span class="svg-arrow-right">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                 <path

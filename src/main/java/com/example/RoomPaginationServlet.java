@@ -80,10 +80,15 @@ public class RoomPaginationServlet extends HttpServlet {
 
         User user = (User) session.getAttribute(USER_PARAM);
         RequestDispatcher dispatcher;
-        if (user.getRole() == UserRole.MANAGER)
-            dispatcher = request.getRequestDispatcher("/main/manager/rooms");
-        else
-            dispatcher = request.getRequestDispatcher("/main/client");
+
+        if (user != null) {
+            if (user.getRole() == UserRole.MANAGER)
+                dispatcher = request.getRequestDispatcher("/main/manager/rooms");
+            else
+                dispatcher = request.getRequestDispatcher("/main/client");
+        } else {
+            dispatcher = request.getRequestDispatcher("/welcome-page");
+        }
 
         dispatcher.forward(request, response);
     }

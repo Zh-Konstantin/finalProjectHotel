@@ -1,10 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<fmt:requestEncoding value="UTF-8" />
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="index_messages"/>
 <!DOCTYPE html>
-<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
-    <title>авторизация</title>
+    <title>authorization</title>
     <meta name="description" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
@@ -64,8 +67,8 @@
                 <div class="block__right">
                     <div id="slider" class="block__box">
                         <div class="box-header">
-                            <p class="header-title">Отель</p>
-                            <p class="header-logo">Hotel!</p>
+                            <p class="header-title"><fmt:message key="msg.hotel"/></p>
+                            <p class="header-logo">MyHotel!</p>
                             <figure class="image-wrap">
                                 <img src="${pageContext.request.contextPath}/images/hotel.jpg" alt="" class="image">
                             </figure>
@@ -76,13 +79,13 @@
                     <div class="block__box">
                         <div id="loginBlock" class="block__login" style="display: flex;">
                             <div class="block__header">
-                                <p class="header-title">Зарегистрироваться в Отеле</p>
-                                <p class="header-desc">Введите пожалуйста свою <br /> электронную почту и пароль</p>
+                                <p class="header-title"><fmt:message key="msg.reg"/></p>
+                                <p class="header-desc"><fmt:message key="msg.pls_enter"/><br/> <fmt:message key="msg.email_and_pass"/></p>
                             </div>
                             <form id="loginForm" action="${pageContext.request.contextPath}/login" method="post" class="form-login">
                                 <input type="hidden" name="currentPage" value="1">
                                 <div class="input-wrap">
-                                    <label class="input-label" for="email1">Электронная почта</label>
+                                    <label class="input-label" for="email1"><fmt:message key="msg.email"/></label>
                                     <p class="input-field">
                                             <span class="svg-email">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -95,8 +98,8 @@
                                 </div>
                                 <div class="input-wrap">
                                         <span class="label-wrapper">
-                                            <label class="input-label" for="password1">Пароль</label>
-                                            <button type="button" class="btn--forgot-password">Забыл пароль?</button>
+                                            <label class="input-label" for="password1"><fmt:message key="msg.pass"/></label>
+                                            <button type="button" class="btn--forgot-password"><fmt:message key="msg.forgot_pass"/></button>
                                         </span>
                                     <p class="input-field">
                                             <span class="svg-pass">
@@ -114,7 +117,7 @@
                                 </div>
                                 <div class="button-wrapper">
                                     <button id="loginBtn" type="submit" class="button">
-                                        Войти в систему
+                                        <fmt:message key="msg.sign_in"/>
                                         <span class="svg-arrow-right">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                 <path
@@ -128,7 +131,7 @@
                             <form id="regForm" action="reg" method="get">
                                 <div class="button-wrapper">
                                     <button id="regBtn" type="submit" class="button--outline" >
-                                        Зарегистрироваться
+                                        <fmt:message key="msg.sign_un"/>
                                         <span class="svg-arrow-right">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                 <path

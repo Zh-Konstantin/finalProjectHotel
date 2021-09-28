@@ -1,10 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="ru">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="manager_messages"/>
+<!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
-    <title>Страница клиента</title>
+    <title>manager page</title>
     <meta name="description" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
@@ -82,41 +85,44 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="user-menu">
                         <ul class="menu-list">
                             <li class="menu-item _active">
-                                <a class="menu-link" href="${pageContext.request.contextPath}/manager-order-pagination"><span class="svg-study"><svg
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
-                                    <path
-                                            d="M15.3 11c.6 0 1.1-.5 1.1-1.1V4c0-1 .8-1.8 1.8-1.9h3.9c1 0 1.8.8 1.8 1.9v4c0 .5-.2 1-.5 1.3-.3.4-.8.6-1.3.6h-1.5c-.5.1-.9.4-.9.9-.1.6.3 1.1.9 1.2h1.6c1 0 2-.5 2.8-1.2.6-.8 1-1.8 1-2.9V4c0-2.2-1.8-4-3.9-4h-3.8c-1 0-2.1.4-2.8 1.2-.8.7-1.2 1.8-1.2 2.8v5.8c0 .3.1.6.3.8.2.2.4.4.7.4zM22.1 14h-3.8c-2.2 0-4 1.8-3.9 4v4c0 2.2 1.7 4 3.9 4h3.8c1 0 2.1-.4 2.8-1.2.7-.7 1.1-1.8 1.1-2.8v-4c0-2.1-1.8-3.9-3.9-4zm1.8 8c0 .5-.2 1-.5 1.3-.3.3-.8.5-1.3.5h-3.9c-.5 0-.9-.2-1.3-.5-.3-.4-.5-.8-.5-1.3v-4c0-1 .8-1.8 1.8-1.9H22c.5 0 .9.2 1.3.5.3.4.5.8.5 1.3V22zM10.1 15c-.4.2-.6.7-.5 1.1v5.8c0 .5-.2 1-.5 1.3-.3.3-.8.5-1.3.5H3.9c-1 0-1.8-.8-1.8-1.9V18c0-1 .8-1.8 1.8-1.9h1.6c.4 0 .8-.2 1-.5.2-.4.2-.8 0-1.1-.2-.3-.6-.5-1-.5H3.9c-1 0-2.1.4-2.8 1.2C.4 16 0 17 0 18v4c0 2.2 1.8 4 3.9 4h3.8c2.2 0 4-1.8 3.9-4v-5.8c.1-.4-.1-.9-.4-1.1-.2-.3-.7-.3-1.1-.1zM3.9 12h3.8c1 0 2.1-.4 2.8-1.2.8-.8 1.2-1.8 1.2-2.8V4c0-2.2-1.7-4-3.9-4H3.9c-1 0-2.1.4-2.8 1.2C.4 1.9 0 3 0 4v4c0 1 .4 2 1.2 2.8.7.7 1.7 1.2 2.7 1.2zM2.1 4c0-.5.2-1 .5-1.3.4-.3.8-.5 1.3-.5h3.9c1 0 1.8.8 1.8 1.9V8c0 .5-.2 1-.5 1.3-.3.3-.8.6-1.3.6H3.9c-.5 0-.9-.2-1.3-.6-.3-.4-.5-.8-.5-1.3V4z"></path>
-                                </svg></span>Просмотр заявок<br>на бронирование</a>
+                                <a class="menu-link" href="${pageContext.request.contextPath}/manager-order-pagination">
+                                    <span class="svg-study">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+                                            <path d="M15.3 11c.6 0 1.1-.5 1.1-1.1V4c0-1 .8-1.8 1.8-1.9h3.9c1 0 1.8.8 1.8 1.9v4c0 .5-.2 1-.5 1.3-.3.4-.8.6-1.3.6h-1.5c-.5.1-.9.4-.9.9-.1.6.3 1.1.9 1.2h1.6c1 0 2-.5 2.8-1.2.6-.8 1-1.8 1-2.9V4c0-2.2-1.8-4-3.9-4h-3.8c-1 0-2.1.4-2.8 1.2-.8.7-1.2 1.8-1.2 2.8v5.8c0 .3.1.6.3.8.2.2.4.4.7.4zM22.1 14h-3.8c-2.2 0-4 1.8-3.9 4v4c0 2.2 1.7 4 3.9 4h3.8c1 0 2.1-.4 2.8-1.2.7-.7 1.1-1.8 1.1-2.8v-4c0-2.1-1.8-3.9-3.9-4zm1.8 8c0 .5-.2 1-.5 1.3-.3.3-.8.5-1.3.5h-3.9c-.5 0-.9-.2-1.3-.5-.3-.4-.5-.8-.5-1.3v-4c0-1 .8-1.8 1.8-1.9H22c.5 0 .9.2 1.3.5.3.4.5.8.5 1.3V22zM10.1 15c-.4.2-.6.7-.5 1.1v5.8c0 .5-.2 1-.5 1.3-.3.3-.8.5-1.3.5H3.9c-1 0-1.8-.8-1.8-1.9V18c0-1 .8-1.8 1.8-1.9h1.6c.4 0 .8-.2 1-.5.2-.4.2-.8 0-1.1-.2-.3-.6-.5-1-.5H3.9c-1 0-2.1.4-2.8 1.2C.4 16 0 17 0 18v4c0 2.2 1.8 4 3.9 4h3.8c2.2 0 4-1.8 3.9-4v-5.8c.1-.4-.1-.9-.4-1.1-.2-.3-.7-.3-1.1-.1zM3.9 12h3.8c1 0 2.1-.4 2.8-1.2.8-.8 1.2-1.8 1.2-2.8V4c0-2.2-1.7-4-3.9-4H3.9c-1 0-2.1.4-2.8 1.2C.4 1.9 0 3 0 4v4c0 1 .4 2 1.2 2.8.7.7 1.7 1.2 2.7 1.2zM2.1 4c0-.5.2-1 .5-1.3.4-.3.8-.5 1.3-.5h3.9c1 0 1.8.8 1.8 1.9V8c0 .5-.2 1-.5 1.3-.3.3-.8.6-1.3.6H3.9c-.5 0-.9-.2-1.3-.6-.3-.4-.5-.8-.5-1.3V4z"></path>
+                                        </svg>
+                                    </span><fmt:message key="msg.menu1"/><br><fmt:message key="msg.menu2"/></a>
                             </li>
                         </ul>
                     </div>
+
                     <form action="${pageContext.request.contextPath}/logout">
-                        <button id="logoutBtn" type="submit" class="button--outline">Выйти</button>
+                        <button id="logoutBtn" type="submit" class="button--outline"><fmt:message key="msg.log_out"/></button>
                     </form>
                 </div>
                 <div class="block__main">
                     <div class="header-block">
-                        <p class="sub-title">Рады видеть вас на работе :)</p>
+                        <p class="sub-title"><fmt:message key="msg.welcome"/></p>
                         <p class="header-title"><span id="greeting">${user.getLogin()}</span> 👋</p>
                     </div>
                     <form id="formClient" action="${pageContext.request.contextPath}/manager-order-pagination" class="form-client">
                         <div class="block__type-occupation">
-                            <p class="title">Просмотрите список заявок от клиентов:</p>
+                            <p class="title"><fmt:message key="msg.view_request1"/></p>
                             <div class="block-types">
 
                                 <table class="about__table">
                                     <thead>
                                     <tr class="about__table-tr">
-                                        <th class="about__table-td">ID заказа</th>
-                                        <th class="about__table-td">Гостиничный номер</th>
-                                        <th class="about__table-td">Количество дней</th>
-                                        <th class="about__table-td">Количество гостей</th>
-                                        <th class="about__table-td">Желаемый класс номера</th>
-                                        <th class="about__table-td">Сумма к оплате</th>
-                                        <th class="about__table-td">Статус</th>
+                                        <th class="about__table-td"><fmt:message key="msg.id"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.room_numb"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.days"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.persons"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.room_class"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.sum"/></th>
+                                        <th class="about__table-td"><fmt:message key="msg.status"/></th>
                                         <th class="about__table-td">  </th>
                                     </tr>
                                     </thead>
@@ -133,7 +139,7 @@
                                             <th class="about__table-td">
                                                 <c:if test="${order.isNew()}">
                                                     <p>
-                                                        <a href="${pageContext.request.contextPath}/manager-order-save?orderId=${order.getId()}">подобрать номер</a>
+                                                        <a href="${pageContext.request.contextPath}/manager-order-save?orderId=${order.getId()}"><fmt:message key="msg.pick_room"/></a>
                                                     </p>
                                                 </c:if>
                                             </th>
