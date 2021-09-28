@@ -103,6 +103,7 @@
                         <button id="logoutBtn" type="submit" class="button--outline"><fmt:message key="msg.log_out"/></button>
                     </form>
                 </div>
+
                 <div class="block__main">
                     <div class="header-block">
                         <p class="sub-title"><fmt:message key="msg.welcome"/></p>
