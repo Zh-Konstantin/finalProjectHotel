@@ -261,6 +261,22 @@
                         </div>
                     </form>
                 </div>
+
+
+                <div class="block__right">
+                    <div class="menu-list">
+                        <p class="title">Отсортируйте перечень доступных комнат при необходимости:</p>
+                        <form action="${pageContext.request.contextPath}/client-room-pagination">
+                            <select name="sort">
+                                <option value="price_up">по возрастанию цены</option>
+                                <option value="places_up">по кол-ву мест</option>
+                                <option value="class_up">по классу номера</option>
+                            </select>
+                            <button type="submit" class="button">Отсортировать</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

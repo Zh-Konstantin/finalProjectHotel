@@ -4,10 +4,10 @@ import com.example.model.entity.Room;
 import com.example.model.entity.User;
 import com.example.model.entity.UserRole;
 import com.example.service.RoomService;
+import com.mysql.cj.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -26,6 +27,10 @@ public class RoomPaginationServlet extends HttpServlet {
 
     private static final int RECORDS_PER_PAGE = 4;
     private static final String USER_PARAM = "user";
+    private static final String SORT_PARAM = "sort";
+    private static final String PRICE_UP_PARAM = "price_up";
+    private static final String PLACE_PARAM = "places_up";
+    private static final String CLASS_PARAM = "class_up";
     private Logger logger;
 
     @Override
@@ -55,6 +60,7 @@ public class RoomPaginationServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        String sortingType = request.getParameter(SORT_PARAM);
 
         String page = request.getParameter("currentPage");
         int currentPage;
@@ -65,6 +71,15 @@ public class RoomPaginationServlet extends HttpServlet {
 
         RoomService roomService = new RoomService();
         List<Room> rooms = roomService.getFreeRooms();
+
+        if (sortingType != null){
+            session.setAttribute(SORT_PARAM, sortingType);
+            sortRooms(rooms, sortingType);
+        } else {
+            sortingType = (String) session.getAttribute(SORT_PARAM);
+            if (sortingType != null)
+                sortRooms(rooms, sortingType);
+        }
 
         int rows = rooms.size();
 
@@ -111,5 +126,15 @@ public class RoomPaginationServlet extends HttpServlet {
             roomsOnPage = rooms.subList(startIndex, endIndex);
         }
         return roomsOnPage;
+    }
+
+    private void sortRooms(List<Room> rooms, String sortingType) {
+        if (sortingType.equals(PRICE_UP_PARAM)) {
+            rooms.sort(Comparator.comparingDouble(Room::getPrice));
+        } else if (sortingType.equals(PLACE_PARAM)) {
+            rooms.sort(Comparator.comparingInt(Room::getSleepingPlaces));
+        } else if (sortingType.equals(CLASS_PARAM)) {
+            rooms.sort(Comparator.comparingInt(o -> o.getRoomClass().getPoint()));
+        }
     }
 }

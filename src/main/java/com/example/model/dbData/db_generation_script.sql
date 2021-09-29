@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS `hotelDB` DEFAULT CHARACTER SET utf8;
+
 CREATE TABLE users (
                        user_id INT PRIMARY KEY AUTO_INCREMENT,
                        login VARCHAR(30) NOT NULL UNIQUE,

@@ -669,7 +669,7 @@ label {
 }
 
 .section__login .block__right .block__box .box-header {
-  padding-top: 6px;
+  padding-top: 26px;
 }
 
 .section__login .block__right .block__box .box-content {
@@ -856,9 +856,10 @@ label {
 .section__client .block__left {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 304px;
+  height: 500px;
+  width: 230px;
   flex-shrink: 0;
+  font-weight: 600;
 }
 
 .section__client .block__left .user__block {

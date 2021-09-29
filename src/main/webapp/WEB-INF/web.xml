@@ -224,6 +224,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+<!--    <filter>
+        <filter-name>SortFilter</filter-name>
+        <filter-class>com.example.filters.SortingFilter</filter-class>
+        <init-param>
+            <param-name>characterEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SortFilter</filter-name>
+        <url-pattern>/client-room-pagination</url-pattern>
+    </filter-mapping>-->
+
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.example.filters.AuthenticationFilter</filter-class>

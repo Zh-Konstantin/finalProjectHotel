@@ -6,16 +6,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Is triggered when user changes interface language
+ * Is triggered when user changes the sorting type
  */
-public class LanguageFilter implements Filter {
+public class SortingFilter implements Filter {
 
     private static final String LANG_PARAM = "lang";
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
 
-        if(request.getParameter(LANG_PARAM)!=null){
+        String param = request.getParameter(LANG_PARAM);
+        if(param != null){
             HttpSession session = request.getSession();
             session.setAttribute(LANG_PARAM, request.getParameter(LANG_PARAM));
         }

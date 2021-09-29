@@ -57,7 +57,6 @@ public class ClientRoomBookingServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             User user = (User) session.getAttribute("user");
-            //handle error if user == null (or parseException);  !!!!!!!!!!!
 
             //new invoice: without order id
             Invoice invoice = new Invoice();
